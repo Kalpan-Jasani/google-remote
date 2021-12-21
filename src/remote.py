@@ -38,6 +38,8 @@ def run():
     mc = cast.media_controller
     rc = cast.socket_client.receiver_controller
 
+    browser.stop_discovery()
+
     # random initial assumption of whether subtitles are enabled. Used for
     # toggling between two states
     subtitles_enabled = True
@@ -84,5 +86,4 @@ def run():
         except KeyboardInterrupt:
             break
 
-    browser.stop_discovery()
     print('exiting')
