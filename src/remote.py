@@ -8,9 +8,7 @@ from pychromecast.discovery import stop_discovery
 from .getch import getch
 
 TV_NAME = 'Living Room TV'
-
-# TODO: change
-SPEAKER_NAME = 'Kalpan\'s room speaker'
+SPEAKER_NAME = 'Living Room speaker'
 
 # amount in seconds by which forward or backward buttons should move the song
 TIME_JUMP = 15
@@ -18,11 +16,11 @@ TIME_JUMP = 15
 # map of inputs provided by user to commands to run
 COMMANDS_MAP = {
     '\r': 'play',
-    '5': 'subtitles',
-    '+': 'increase_volume',
-    '-': 'decrease_volume',
-    '7': 'back',
-    '9': 'front',
+    '0': 'subtitles',
+    '/': 'increase_volume',
+    '-': 'decreas_volume',
+    '1': 'back',
+    '3': 'front',
     '\t': 'switch_device'
 }
 
@@ -73,9 +71,6 @@ def run():
             # execute command
 
             ch = getch()
-            # TODO: remove next line, just for debugging
-            if ch == '0':
-                break
             if ch == '\r':
                 print('pressed: \\r')
             elif ch == '\t':
