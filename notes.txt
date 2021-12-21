@@ -1,0 +1,20 @@
+Requirements
+- should have the enter button for play/pause
+- should have 5 button to enable/disable default subtitles which tries to load subtitles
+- should have + button to increase volume 
+- should have - button to decrease volume
+- should have 7 button to go back by 15 seconds
+- should have 9 button to go front by 15 seconds
+- shoud not require secondary input, say enter key
+- should automatically connect to the chromecast on boot
+- plastic wrapped to prevent damage to keyboard
+- pi is kept plugged in
+- should not require reconnecting after some idle time, rather should detect it based on pychromecast API
+
+- Good to have:
+    - show when the pi is connected to the chromecast, possibly by starting a video on the Chromecast
+    - reconnect button
+    - tab to switch chromecast to the living room google home
+
+- Not to be done
+    - 
