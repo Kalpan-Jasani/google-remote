@@ -1,5 +1,6 @@
 """main runner for the project"""
 import sys
+import string
 
 import pychromecast
 from pychromecast.discovery import stop_discovery
@@ -54,7 +55,13 @@ def run():
                 break
 
             # TODO: maybe print enter key as not a literal new line but a \r
-            print('pressed: ', ch, flush=True)
+            if ch == '\r':
+                print('pressed: \\r')
+            elif ch not in string.printable or ch in string.whitespace:
+                print('pressed: ?')
+            else:
+                print('pressed:', ch)
+
             mc.update_status()
             rc.update_status()
             command = COMMANDS_MAP.get(ch)
@@ -63,7 +70,7 @@ def run():
 
             elif command == 'subtitles':
                 mc.disable_subtitle() if subtitles_enabled else len(
-                    mc.status.subtitle_tracks) > 0 and mc.status.subtitle_tracks[0]['trackId'] or None
+                    mc.status.subtitle_tracks) > 0 and mc.enable_subtitle(mc.status.subtitle_tracks[0]['trackId'])
                 subtitles_enabled = not subtitles_enabled
             elif command == 'increase_volume':
                 rc.set_volume(rc.status.volume_level+0.1)
@@ -73,7 +80,7 @@ def run():
                 new_time = mc.status.current_time - TIME_JUMP
                 mc.seek(max(0, new_time))
             elif command == 'front':
-                new_time = mc.status.curret_time + TIME_JUMP
+                new_time = mc.status.current_time + TIME_JUMP
                 mc.seek(min(new_time, mc.status.duration))
 
         except KeyboardInterrupt:
