@@ -10,11 +10,13 @@ Requirements
 - plastic wrapped to prevent damage to keyboard
 - pi is kept plugged in
 - should not require reconnecting after some idle time, rather should detect it based on pychromecast API
+- not to hog the network with constant polling?
 
 - Good to have:
     - show when the pi is connected to the chromecast, possibly by starting a video on the Chromecast
     - reconnect button
     - tab to switch chromecast to the living room google home
+    - optimized status updates - so that volume and play pause don't get queried on every change
 
 - Not to be done
     - 

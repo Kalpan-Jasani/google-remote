@@ -37,16 +37,9 @@ def run():
     mc = cast.media_controller
     rc = cast.socket_client.receiver_controller
 
-    # random initial assumption of whether something is playing vs paused
-    # used for toggling between the two states
-    playing = True
-
-    # similar logic as above for subtitles
+    # random initial assumption of whether subtitles are enabled. Used for
+    # toggling between two states
     subtitles_enabled = True
-
-    # similar logic for setting an arbitrary initial volume which gets nudged
-    # relatively
-    volume = 0
 
     # main read loop taking user input
     while(True):
@@ -56,29 +49,32 @@ def run():
             # execute command
 
             ch = getch()
-            print('pressed: ', ch)
+            # TODO: remove next line, just for debugging
+            if ch == '0':
+                break
+
+            # TODO: maybe print enter key as not a literal new line but a \r
+            print('pressed: ', ch, flush=True)
+            mc.update_status()
+            rc.update_status()
             command = COMMANDS_MAP.get(ch)
             if command == 'play':
-                mc.pause() if playing else mc.play()
+                mc.pause() if mc.status.player_is_playing else mc.play()
+
             elif command == 'subtitles':
                 mc.disable_subtitle() if subtitles_enabled else len(
                     mc.status.subtitle_tracks) > 0 and mc.status.subtitle_tracks[0]['trackId'] or None
+                subtitles_enabled = not subtitles_enabled
             elif command == 'increase_volume':
-                if not volume == 0.5:
-                    volume += 0.1
-                    rc.set_volume(volume)
+                rc.set_volume(rc.status.volume_level+0.1)
             elif command == 'decrease_volume':
-                if not volume == -0.5:
-                    volume -= 0.1
-                    rc.set_volume(volume)
+                rc.set_volume(rc.status.volume_level-0.1)
             elif command == 'back':
-                mc.update_status()
-                if mc.status.current_position - TIME_JUMP > 0:
-                    mc.seek(mc.status.current_position - TIME_JUMP)
+                new_time = mc.status.current_time - TIME_JUMP
+                mc.seek(max(0, new_time))
             elif command == 'front':
-                mc.update_status()
-                if mc.status.current_position + TIME_JUMP < mc.status.duration:
-                    mc.seek(mc.status.current_position + TIME_JUMP)
+                new_time = mc.status.curret_time + TIME_JUMP
+                mc.seek(min(new_time, mc.status.duration))
 
         except KeyboardInterrupt:
             break
