@@ -53,8 +53,6 @@ def run():
             # TODO: remove next line, just for debugging
             if ch == '0':
                 break
-
-            # TODO: maybe print enter key as not a literal new line but a \r
             if ch == '\r':
                 print('pressed: \\r')
             elif ch not in string.printable or ch in string.whitespace:
