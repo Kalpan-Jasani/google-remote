@@ -1,0 +1,13 @@
+[Unit]
+Description=Google Remote
+After=multi-user.target
+
+[Service]
+ExecStart=/home/pi/projects/google-remote/run.sh
+Restart=always
+RestartSec=10s
+KillMode=process
+TimeoutSec=infinity
+
+[Install]
+WantedBy=multi-user.target
