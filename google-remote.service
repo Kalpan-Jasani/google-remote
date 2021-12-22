@@ -3,7 +3,7 @@ Description=Google Remote
 After=multi-user.target
 
 [Service]
-ExecStart=/home/pi/projects/google-remote/run.sh
+ExecStart=/bin/bash -c '/home/pi/projects/google-remote/run.sh > /home/pi/google-remote.log 2>&1'
 Restart=always
 RestartSec=10s
 KillMode=process
