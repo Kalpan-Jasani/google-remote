@@ -80,6 +80,8 @@ def run():
             else:
                 print('pressed:', ch)
 
+            if ch == 'q':
+                break
             mc.update_status()
             rc.update_status()
             command = COMMANDS_MAP.get(ch)

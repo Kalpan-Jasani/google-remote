@@ -4,10 +4,8 @@ After=network.target
 Before=systemd-logind.service getty@tty1.service
 
 [Service]
+type=oneshot
 ExecStart=/bin/bash -c '/home/pi/projects/google-remote/run.sh 2> /home/pi/google-remote.log'
-Restart=always
-RestartSec=10s
-KillMode=process
 TimeoutSec=infinity
 TTYPath=/dev/tty1
 StandardInput=tty
