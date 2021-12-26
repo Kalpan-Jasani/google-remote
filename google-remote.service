@@ -1,7 +1,7 @@
 [Unit]
 Description=Google Remote
 After=network.target
-Before=systemd-logind.service
+Before=systemd-logind.service getty@tty1.service
 
 [Service]
 ExecStart=/bin/bash -c '/home/pi/projects/google-remote/run.sh 2> /home/pi/google-remote.log'
@@ -14,4 +14,4 @@ StandardInput=tty
 
 [Install]
 WantedBy=network.target
-RequiredBy=systemd-logind.service
+RequiredBy=systemd-logind.service getty@tty1.service
