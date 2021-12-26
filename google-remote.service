@@ -1,17 +1,17 @@
 [Unit]
 Description=Google Remote
-After=multi-user.target
+After=network.target
+Before=systemd-logind.service
 
 [Service]
 ExecStart=/bin/bash -c '/home/pi/projects/google-remote/run.sh 2> /home/pi/google-remote.log'
-ExecStartPre=/bin/chvt 2
-ExecStartPost=/bin/chvt 1
 Restart=always
 RestartSec=10s
 KillMode=process
 TimeoutSec=infinity
-TTYPath=/dev/tty2
+TTYPath=/dev/tty1
 StandardInput=tty
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=network.target
+RequiredBy=systemd-logind.service
