@@ -11,6 +11,7 @@ KillMode=process
 TimeoutSec=infinity
 TTYPath=/dev/tty1
 StandardInput=tty
+TimeoutStartSec=0
 
 [Install]
 WantedBy=network.target
