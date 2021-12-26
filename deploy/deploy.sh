@@ -1,5 +1,5 @@
 #!/bin/bash
-cd ..
+cd /home/pi/projects/google-remote
 
 # pull new changes
 git reset --hard HEAD
