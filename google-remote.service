@@ -3,9 +3,9 @@ Description=Google Remote
 Requires=multi-user.target
 
 [Service]
-ExecStart=openvt --console=2 --switch --force --wait /bin/bash -c \
+ExecStart=/bin/openvt --console=2 --switch --force --wait /bin/bash -c \
             '/home/pi/projects/google-remote/run.sh 2> /home/pi/google-remote.log'
-ExecStartPost=deallocvt
+ExecStartPost=/usr/bin/deallocvt
 
 # disable timeout logic during start of process
 TimeoutSec=infinity
