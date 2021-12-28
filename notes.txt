@@ -1,3 +1,11 @@
+Good setup steps for fresh install
+- scripts expect to be at place /home/pi/projects/google-remote
+- you can have a non-gui unix based OS on the Raspberry Pi / system
+- need virtualenv and a good Python3.5+ version
+- need git
+- need a valid Python environment containing the pychromecast library
+- non login?
+
 Requirements
 - should have the enter button for play/pause
 - should have 5 button to enable/disable default subtitles which tries to load subtitles

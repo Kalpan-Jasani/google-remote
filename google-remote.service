@@ -3,7 +3,7 @@ Description=Google Remote
 After=multi-user.target
 
 [Service]
-ExecStart=/bin/openvt --console=2 --switch --force --wait /bin/bash -c \
+ExecStart=/bin/openvt --console=2 --switch --force --wait -- /bin/bash -c \
             '/home/pi/projects/google-remote/run.sh 2> /home/pi/google-remote.log'
 ExecStartPost=/usr/bin/deallocvt
 
