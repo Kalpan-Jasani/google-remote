@@ -14,12 +14,12 @@ TIME_JUMP = 15
 
 # map of inputs provided by user to commands to run
 COMMANDS_MAP = {
-    '.': 'play',
-    '0': 'subtitles',
-    '/': 'increase_volume',
-    '-': 'decrease_volume',
-    '1': 'back',
-    '3': 'front',
+    '0': 'play',
+    '.': 'subtitles',
+    '3': 'increase_volume',
+    '2': 'decrease_volume',
+    '*': 'back',
+    '\b': 'front',
     '\t': 'switch_device'
 }
 
