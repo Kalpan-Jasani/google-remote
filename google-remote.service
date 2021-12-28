@@ -1,6 +1,6 @@
 [Unit]
 Description=Google Remote
-After=multi-user.target
+Before=systemd-logind.service
 
 [Service]
 ExecStart=/bin/openvt --console=2 --switch --force --wait -- /bin/bash -c \
