@@ -4,7 +4,7 @@ Good setup steps for fresh install
 - need virtualenv and a good Python3.5+ version
 - need git
 - need a valid Python environment containing the pychromecast library
-- non login?
+- maybe good to have ssh enabled Raspberry Pi
 
 Requirements
 - should have the enter button for play/pause
