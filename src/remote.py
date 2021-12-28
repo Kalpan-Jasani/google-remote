@@ -7,7 +7,7 @@ import pychromecast
 from pychromecast.discovery import stop_discovery
 from .getch import getch
 
-TV_NAME = 'Living Room TV'
+TV_NAME = 'Kalpan\s room speaker'
 SPEAKER_NAME = 'Living Room speaker'
 
 # amount in seconds by which forward or backward buttons should move the song
@@ -18,7 +18,7 @@ COMMANDS_MAP = {
     '\r': 'play',
     '0': 'subtitles',
     '/': 'increase_volume',
-    '-': 'decreas_volume',
+    '-': 'decrease_volume',
     '1': 'back',
     '3': 'front',
     '\t': 'switch_device'
