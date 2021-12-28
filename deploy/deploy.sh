@@ -4,7 +4,7 @@ cd /home/pi/projects/google-remote
 # pull new changes
 git reset --hard HEAD
 git checkout raspberrypi
-git pull
+git pull --force
 
 # place service file in system
 sudo cp google-remote.service /lib/systemd/system/google-remote.service
