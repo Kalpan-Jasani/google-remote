@@ -19,9 +19,14 @@ COMMANDS_MAP = {
     '3': 'increase_volume',
     '2': 'decrease_volume',
     '*': 'back',
-    '\b': 'front',
+    127: 'front',
     '\t': 'switch_device'
 }
+
+
+def get_command(ch):
+    """get command from a remote input"""
+    return COMMANDS_MAP.get(ch) or COMMANDS_MAP.get(ord(ch))
 
 
 def connect(device_name):
@@ -70,20 +75,14 @@ def run():
             # execute command
 
             ch = getch()
-            if ch == '\r':
-                print('pressed: \\r')
-            elif ch == '\t':
-                print('pressed: \\t')
-            elif ch not in string.printable or ch in string.whitespace:
-                print('pressed: ?')
+            if ch == 'q':
+                break
+            if ch not in string.printable or ch in string.whitespace:
+                print(f'pressed: ? ({ord(ch)})')
             else:
                 print('pressed:', ch)
 
-            if ch == 'q':
-                break
-            mc.update_status()
-            rc.update_status()
-            command = COMMANDS_MAP.get(ch)
+            command = get_command(ch)
 
             # a special case of a command to switch to the speaker to control
             # it!
@@ -96,10 +95,11 @@ def run():
                     cast = connect(active_device)
                     mc, rc = cast.media_controller, cast.socket_client.receiver_controller
                     tab_count = 0
-
-            # resetting tab count as a double tap of tab is required to switch
             else:
                 tab_count = 0
+
+            mc.update_status()
+            rc.update_status()
 
             if command == 'play':
                 mc.pause() if mc.status.player_is_playing else mc.play()
@@ -114,10 +114,10 @@ def run():
                 rc.set_volume(rc.status.volume_level-0.1)
             elif command == 'back':
                 new_time = mc.status.current_time - TIME_JUMP
-                mc.seek(max(0, new_time))
+                mc.seek(max(0+.01, new_time))
             elif command == 'front':
                 new_time = mc.status.current_time + TIME_JUMP
-                mc.seek(min(new_time, mc.status.duration))
+                mc.seek(min(new_time, mc.status.duration-0.01))
 
         except pychromecast.error.PyChromecastError:
             # eat up such errors, effectively ignoring them
