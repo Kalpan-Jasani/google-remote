@@ -4,7 +4,6 @@ import string
 import time
 
 import pychromecast
-from pychromecast.discovery import stop_discovery
 from .getch import getch
 
 TV_NAME = 'Living Room TV'
@@ -15,7 +14,7 @@ TIME_JUMP = 15
 
 # map of inputs provided by user to commands to run
 COMMANDS_MAP = {
-    '\r': 'play',
+    '.': 'play',
     '0': 'subtitles',
     '/': 'increase_volume',
     '-': 'decrease_volume',
@@ -120,6 +119,9 @@ def run():
                 new_time = mc.status.current_time + TIME_JUMP
                 mc.seek(min(new_time, mc.status.duration))
 
+        except pychromecast.error.PyChromecastError:
+            # eat up such errors, effectively ignoring them
+            continue
         except KeyboardInterrupt:
             break
 

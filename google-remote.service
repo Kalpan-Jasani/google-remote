@@ -10,8 +10,8 @@ ExecStartPost=/usr/bin/deallocvt
 # disable timeout logic during start of process
 TimeoutSec=infinity
 
-# always restart
-Restart=always
+# restart when fails
+Restart=on-failure
 
 # wait 30 seconds before restarting
 RestartSec=5
