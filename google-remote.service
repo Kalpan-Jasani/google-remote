@@ -1,16 +1,17 @@
 [Unit]
 Description=Google Remote
-After=network.target
-Before=systemd-logind.service getty@tty1.service
+Requires=multi-user.target
 
 [Service]
-type=oneshot
-ExecStart=/bin/bash -c '/home/pi/projects/google-remote/run.sh 2> /home/pi/google-remote.log'
-TimeoutSec=infinity
-TTYPath=/dev/tty1
-StandardInput=tty
-TimeoutStartSec=0
+ExecStart=openvt --console=2 --switch --force --wait /bin/bash -c \
+            '/home/pi/projects/google-remote/run.sh 2> /home/pi/google-remote.log'
+ExecStartPost=deallocvt
 
-[Install]
-WantedBy=network.target
-RequiredBy=systemd-logind.service getty@tty1.service
+# disable timeout logic during start of process
+TimeoutSec=infinity
+
+# always restart
+Restart=always
+
+# wait 30 seconds before restarting
+RestartSec=30
