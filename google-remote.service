@@ -1,5 +1,6 @@
 [Unit]
 Description=Google Remote
+After=multi-user.target
 Requires=multi-user.target
 
 [Service]
