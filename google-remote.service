@@ -14,7 +14,7 @@ TimeoutSec=infinity
 Restart=always
 
 # wait 30 seconds before restarting
-RestartSec=30
+RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
